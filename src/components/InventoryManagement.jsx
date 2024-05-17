@@ -11,7 +11,7 @@ const defaultData = [
   { id: 5, name: "Level", quantity: 12 }
 ];
 
-const defaultInventory = { name: "", quantity: 1 };
+const defaultInventory = {};
 
 const InventoryManagement = () => {
   const [inventoryList, setInventoryList] = useState([]);

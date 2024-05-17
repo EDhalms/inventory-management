@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, TextField, Dialog, DialogTitle, DialogActions, DialogContent } from '@mui/material';
 
 const InventoryFormDialog = ({ open, data, onSubmit, onCancel }) => {
-  const [inventory, setInventory] = useState(data);
+  const [inventory, setInventory] = useState({});
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -22,6 +22,11 @@ const InventoryFormDialog = ({ open, data, onSubmit, onCancel }) => {
     return Object.keys(newErrors).length === 0;
   };
 
+  const resetForm = () => {
+    setInventory({});
+    setErrors({});
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setInventory({ ...inventory, [name]: value });
@@ -30,11 +35,13 @@ const InventoryFormDialog = ({ open, data, onSubmit, onCancel }) => {
   const handleSubmit = () => {
     if (validateForm()) {
       onSubmit({ ...inventory, quantity: parseInt(inventory.quantity) });
+      resetForm();
     }
   };
 
   const handleCancel = () => {
     onCancel();
+    resetForm();
   };
   
   useEffect(() => {
